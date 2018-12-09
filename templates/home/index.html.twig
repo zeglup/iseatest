@@ -10,7 +10,7 @@
     .my-form-class { font: 16px/1.5 sans-serif; }
 </style>
 
-{% for message in app.flashes('clientPostOk') %}
+{% for message in app.flashes('clientPost') %}
     <div class="flash-notice">
         {{ message }}
     </div>

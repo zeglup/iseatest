@@ -21,14 +21,19 @@ class HomeController extends AbstractController
 
         if ($clientForm->isSubmitted() && $clientForm->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($client);
-            $entityManager->flush();
 
-            $this->addFlash(
-                'clientPostOk',
-                'Client enregistré'
-            );
+            if ($this->get('App\Service\CsvService')->add($client))
+            {
+                $entityManager->persist($client);
+                $entityManager->flush();
+                $this->addFlash('clientPost', 'Client enregistré');
+            }
+            else
+            {
+                $this->addFlash('clientPost', 'Erreur interne');
+            }
             return $this->redirectToRoute('index');
+
         }
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
