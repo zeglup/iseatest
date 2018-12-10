@@ -12,15 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-    public function index(Request $request, CsvService $csvService)
+    public function index(Request $request)
     {
         $client = new Client();
         $clientForm = $this->createForm(ClientFormType::class, $client);
         $clientForm->handleRequest($request);
 
         if ($clientForm->isSubmitted() && $clientForm->isValid()) {
-
-            $csvService->add($client);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($client);

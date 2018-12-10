@@ -31,3 +31,8 @@ services:
     App\Service\CsvService:
         arguments:
             $csvPath: '%csv_path%'
+
+    App\EventListener\CsvExport:
+        tags:
+        - { name: doctrine.event_listener, event: postPersist }
+        arguments: [ '@App\Service\CsvService' ]

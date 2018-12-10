@@ -24,7 +24,7 @@ class CsvService
         $this->serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
     }
 
-    public function add($data)
+    public function addClient($data)
     {
         $dateSerializer = new Serializer(array(new DateTimeNormalizer('Y-m-d')));
 
@@ -39,7 +39,7 @@ class CsvService
 
 
         $tempArray = explode("\n", $serializedData); // https://github.com/symfony/symfony/pull/29283
-        $serializedData = $tempArray[1];
+        $serializedData = $tempArray[1] . "\n";
 
         $fileSystem = new Filesystem();
         $fileSystem->appendToFile($this->csvPath, $serializedData);
