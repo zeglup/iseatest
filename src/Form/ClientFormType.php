@@ -23,7 +23,7 @@ class ClientFormType extends AbstractType
             ->add('zipcode', null, ['label' => 'Code postal' ])
             ->add('city', null, ['label' => 'Ville' ])
             ->add('country', null, ['label' => 'Pays' ])
-            ->add('birthdate', null, ['label' => 'Date de naissance', 'format' => 'Y-m-d' ])
+            ->add('birthdate', DateTimeType::class, ['label' => 'Date de naissance'])
             ->add('loyaltyCardNumber', null, ['label' => 'Numéro de carte fidélité' ])
             ->add('submit', SubmitType::class, ['label' => 'Enregistrer' ])
         ;

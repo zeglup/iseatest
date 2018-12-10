@@ -4,34 +4,29 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Form\ClientFormType;
+use App\Service\CsvService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    /**
-     * @Route("/home", name="home")
-     */
-    public function index(Request $request)
+
+    public function index(Request $request, CsvService $csvService)
     {
         $client = new Client();
         $clientForm = $this->createForm(ClientFormType::class, $client);
         $clientForm->handleRequest($request);
 
         if ($clientForm->isSubmitted() && $clientForm->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
 
-            if ($this->get('App\Service\CsvService')->add($client))
-            {
-                $entityManager->persist($client);
-                $entityManager->flush();
-                $this->addFlash('clientPost', 'Client enregistré');
-            }
-            else
-            {
-                $this->addFlash('clientPost', 'Erreur interne');
-            }
+            $csvService->add($client);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($client);
+            $entityManager->flush();
+
+            $this->addFlash('clientPost', 'Client enregistré');
             return $this->redirectToRoute('index');
 
         }
