@@ -8,7 +8,6 @@ Install packages
 $ composer install
 ```
 
-Create .env file from .env.dist and change values.
 
 #####Database
 ```sh
@@ -21,3 +20,7 @@ $ bin/console doc:fix:load -n
 ```bash
 $ php bin/console server:run
 ```
+
+Login : test
+
+Password: toto
