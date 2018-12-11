@@ -20,5 +20,9 @@
     {{ form_start(client_form, {attr: {class: 'my-form-class'} }) }}
       {{ form_widget(client_form) }}
     {{ form_end(client_form) }}
+    <div class="logout">
+        <a href="{{ path('logout') }}">Quitter</a>
+    </div>
 </div>
+
 {% endblock %}
