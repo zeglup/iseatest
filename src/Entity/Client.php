@@ -58,16 +58,16 @@ class Client
      */
     private $country;
 
-    /**
-     * @Assert\DateTime
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $birthdate;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $loyaltyCardNumber;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $status = true;
 
     public function getId(): ?int
     {
@@ -178,6 +178,18 @@ class Client
     public function setLoyaltyCardNumber(string $loyaltyCardNumber): self
     {
         $this->loyaltyCardNumber = $loyaltyCardNumber;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

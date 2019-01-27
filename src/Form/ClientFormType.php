@@ -16,6 +16,7 @@ class ClientFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('status', null, ['label' => 'Activé' ])
             ->add('gender', null, ['label' => 'Civilité' ])
             ->add('forname', null, ['label' => 'Prénom' ])
             ->add('surname', null, ['label' => 'Nom' ])
